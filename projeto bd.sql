@@ -5,18 +5,16 @@ Select * from aluno;
 ##----------------------------------------------------------------
 /*PRIMEIRO*/
 
-DELIMITER $
-create procedure novoaluno (mat_aluno INTEGER, cod_curso INTEGER, dat_nasc DATE, tot_cred INTEGER, mgp DOUBLE, nom_alun VARCHAR (60),  email VARCHAR (30))
+Delimiter $
+create function novoaluno(mat_aluno INTEGER, cod_curso INTEGER, dat_nasc DATE, tot_cred INTEGER, mgp DOUBLE, nom_alun VARCHAR (60),  email VARCHAR (30))
+returns varchar(40)
 deterministic
-begin
-insert into Aluno values(mat_aluno, cod_curso , dat_nasc , tot_cred , mgp , nom_alun, email);
+begin insert into Aluno(mat_aluno, cod_curso , dat_nasc , tot_cred , mgp , nom_alun, email)
+values (mat_aluno, cod_curso , dat_nasc , tot_cred , mgp , nom_alun, email);
+return nom_alun;
 end $
 
-call novoaluno('', '' , '1111-11-1', 60, 8.2, 'aaaaaa', '12345@email.com');
-select * from aluno;
-
-
-drop procedure novoaluno;
+select novoaluno('', '' , '1111-11-1', 60, 8.2, 'aaaaaa', '12345@email.com');
 ##----------------------------------------------------------------
 /*SEGUNDO*/
 
