@@ -1,0 +1,80 @@
+create database banco;
+drop database banco;
+
+create database meubanco;
+use meubanco;
+
+create table minhatabela (
+nome varchar(60)
+);
+
+drop table minhatabela;
+
+create table pessoas(
+ nome varchar(60),
+  salario int,
+ data_nascimento date
+);
+
+alter table pessoas 
+add column profissao varchar(150);
+
+insert into pessoas (nome, salario, data_nascimento, profissao) 
+values ( "Ana Maria", 1500, "1991-03-03" , "professora");
+
+select * from pessoas;
+
+insert into pessoas (nome, salario, data_nascimento, profissao) 
+values ( "Manuel", 1800, "13/01/2000" , "engenheiro"); 
+
+select * from pessoas
+where salario > 1555;
+
+select nome from pessoas
+where nome = "Ana Maria";
+
+insert into pessoas (nome, salario, data_nascimento, profissao)
+values ("Maria", 2500, "1996-05-11", "secretária");
+
+update pessoas 
+set salario = 5000
+where nome = "Maria";
+
+select * from pessoas;
+
+delete from pessoas
+where profissao = "engenheiro";
+
+drop table pessoas;
+
+create table pessoas( 
+	id int primary key auto_increment not null,
+	nome varchar (100),
+    salario int,
+    data_nasc date
+);
+
+alter table pessoas
+add column profissao varchar(100);
+
+insert into pessoas(nome, salario, data_nasc, profissao)
+values("Pedro", 4500, "1999-12-04", "Advogado");
+
+select * from pessoas;
+
+/*CONSTRAINTS - foreign kye*/
+
+create table enderecos(
+	id int primary key auto_increment not null,
+    rua varchar(255),
+    numero varchar(10),
+    pessoa_id int not null,
+    foreign key (pessoa_id) references pessoa(id)
+);
+
+drop table enderecos;
+
+select * from enderecos;
+
+insert into enderecos
+values('', "Rua das flores", "1415", 2);
